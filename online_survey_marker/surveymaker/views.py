@@ -67,7 +67,7 @@ def buildQ(request,survey_id,num_of_choice):
         form = MCMakerForm(num_of_choice,request.POST)
         if form.is_valid():
             question_text = form.cleaned_data['question_text']
-            question = survey.mcquestion_set.create(question_text=question_text,pub_date=timezone.now())
+            question = survey.mcquestion_set.create(question_text=question_text)
             for idx in range(num_of_choice):
                 question.mcchoice_set.create(choice_text=form.cleaned_data['choice_'+str(idx)])
 
