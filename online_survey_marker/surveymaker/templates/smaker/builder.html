@@ -1,0 +1,9 @@
+<form action="{% url 'surveymaker:initQ' sid %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+<h3>Survey Preview</h3>
+<p>
+    {%include 'smaker/survey.html' with all_survey_set=all_survey_set %}
+</p>

@@ -1,11 +1,15 @@
-{% for survey in all_survey_set%}
-    <h1>{{survey.survey_name}}</h1>
-    {% for mcquestion in survey.mcquestion_set.all%}
-        <h2>{{ mcquestion.question_text }}</h2>
-        <ul>
-        {% for mcchoice in mcquestion.mcchoice_set.all %}
-            <li>{{ mcchoice.choice_text }}</li>
+{% if all_survey_set %}
+    {% for survey in all_survey_set %}
+        <h1>Survey Name: {{survey.survey_name}}</h1>
+        {% for mcquestion in survey.mcquestion_set.all%}
+            <h2>{{forloop.counter}}. {{mcquestion.question_text}}</h2>
+            <ul>
+            {% for mcchoice in mcquestion.mcchoice_set.all %}
+                <li>{{ mcchoice.choice_text }}</li>
+            {% endfor %}
+            </ul>
         {% endfor %}
-        </ul>
     {% endfor %}
-{% endfor %}
+{% else %}
+    <p>Empty Survey</p>
+{% endif %}
