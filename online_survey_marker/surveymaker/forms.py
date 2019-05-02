@@ -11,6 +11,6 @@ class MCMakerForm(forms.Form):
     def __init__(self,num_of_choice, *args,**kwargs):
         super(MCMakerForm, self).__init__(*args, **kwargs)
         for idx in range(num_of_choice):
-            self.fields['choice_'+str(idx)] = forms.CharField(label=str(idx)+' Choice', max_length=100)
+            self.fields['choice_'+str(idx)] = forms.CharField(label=str(idx+1)+' Choice ', max_length=100)
 
     question_text = forms.CharField(label='Your Question Text', max_length=100)

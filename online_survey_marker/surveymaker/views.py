@@ -54,7 +54,7 @@ def initQ(request,survey_id):
             return HttpResponseRedirect(reverse('surveymaker:buildQ',args=(survey.id,num_of_choice,)))
     
     context = {
-                'all_survey_set':[survey],
+                'survey':survey,
                 'form': NumberForm(),
                 'sid': survey_id
             }

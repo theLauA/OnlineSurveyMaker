@@ -33,22 +33,15 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 * `Surveyview` render survey as form without submit button.
 * `create` view contains one text input field for user to enter the new survey's name. Submit will take the user to `initQ` view.
 * `initQ` view contains one Integer input field for user to define how many multiple choices will the new question have. It also display a preview of the survey, showing survey's current added multiple choice question(s) if any.
-* `buildQ` view contains one text input field for question text, and X text input fields as defined in `initQ` view for choices. Zero choice is prohibited. Valid submission will take user back to `initQ` view.
-
-# Porgress
-1. Go through DJango turtorial
-..* Went through 2 parts of DJango turtorial which is a polling app. Will build on the turtorial app instead of using additional open source packages.
-..* Finished turtorial except
-2. Create new app, surveymaker
-..* Pass userId between views using session
-3. Added Features: ability to create a new survey and add mc questions to the survey; view created survey
+* `buildQ` view contains one text input field for question text, and X text input fields as defined in `initQ` view for choices. Zero choice is prohibited. Valid submission will take user back to `initQ` view. A link to go back to `index` view.
 
 # Not Implemented
+* Create Question other than Multiple Choice
+* Edit question
 * Delete survey
 * Delete question
 * Dynamic field
-* Active Form and Store Result
-* Prevent Empty Question
+* Active Form and Store Result 
 * Choice or More for Multiple Choice Question
 
 # Models to support other user filling out survey
@@ -68,3 +61,12 @@ Create Django applicaton \
 `python manager.py startapp appname` \
 Reset database migration define by app \
 `python manager.py --fake surveymaker zero` 
+
+# Porgress
+1. Go through DJango turtorial
+..* Went through 2 parts of DJango turtorial which is a polling app. Will build on the turtorial app instead of using additional open source packages.
+..* Finished turtorial except
+2. Create new app, surveymaker
+..* Pass userId between views using session
+3. Added Features: ability to create a new survey and add mc questions to the survey; view created survey
+4. Added: ability to add multiple choice question to a created survey.

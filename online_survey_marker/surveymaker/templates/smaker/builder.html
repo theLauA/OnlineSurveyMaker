@@ -6,5 +6,5 @@
 <a href="{% url 'surveymaker:index' %}" method="get">Finished and Return To Home Page</a>
 <h3>Survey Preview</h3>
 <p>
-    {%include 'smaker/survey_inactive.html' with all_survey_set=all_survey_set %}
+    {%include 'smaker/survey_inactive.html' with survey=survey %}
 </p>

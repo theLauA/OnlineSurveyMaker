@@ -1,7 +1,11 @@
 {% if all_survey_set %}
     <ul>
     {% for survey in all_survey_set %}
-       <li> <a href="{% url 'surveymaker:sview' survey.id %}" action="GET">{{survey.survey_name}}</a></li>
+       <li> 
+        <a href="{% url 'surveymaker:sview' survey.id %}" action="GET">{{survey.survey_name}}</a>
+        &nbsp;&nbsp;
+        <a href="{% url 'surveymaker:initQ' survey.id %}" action="GET">Add More Question</a> 
+       </li>
     {% endfor %}
     </ul>
 {% else %}
