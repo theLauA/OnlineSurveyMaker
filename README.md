@@ -8,7 +8,7 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 # User Cases
 1. The user create a new survey
 2. Add multiple choice questions to the survey 
-3. Save the surveys
+3. Save the survey
 
 # Approach
 * A home page to choose between MAKE view or View view
@@ -18,8 +18,10 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
     * Specify Number of Choices First, then use django form to generate textfields for input
     * Preview Created Questions
 * View view:
-    * View Created Surveys
-* View.pj will acts as the controller in MVC while html in templates will act as the view in MVC
+    * For user to go through Created Surveys
+    * Similar to the turtorial `polls` app in terms of view
+    * Models needed to save surveys data is similar to `polls` app as well, but it doesn't fit the use cases well enough to inherent Models from `polls`.
+* View.py will acts as the controller in MVC while html in templates will act as the view in MVC
 
 # Models
 * `MCUser` model contains username and date_joined fields. Hardcoded in the application as it is not the focus.
@@ -49,10 +51,13 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 * Active Form and Store Result 
 * Choice or More for Multiple Choice Question
 * Scheduled publication of survey
+* Grouping Surveys
 
-# Models to support other user filling out survey
+# To support other user filling out survey
+* If we want other user to execute the survey, we would want the result of the survey to be saved. Currently, my view to display survey doesn't allow user to submit their answer. I would have a new view rendering the survey provided with user and survey as context, and allow user to submit their result.
 * Create an `Answer` Model with a reference to `MCQuestion` model, a reference to `MCChoice` model PK, a reference to MCUser model PK
-* Create an `User` Model with more fields than `MCUser` Model(maybe extend `MCUser` Model). Tihs includes a password field, and a email field for identification, to support other users(instead of hardcoding) to auhtenticate and log on. 
+* Create an `User` Model with more fields than `MCUser` Model(maybe extend `MCUser` Model). Tihs includes a password field, and a email field for identification, to support other users(instead of hardcoding) to auhtenticate and log on. If permission is also a concern, additional models for group and membership will also be needed.
+
 
 
 # Commands
