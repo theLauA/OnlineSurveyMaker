@@ -19,6 +19,7 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
     * Preview Created Questions
 * View view:
     * View Created Surveys
+* View.pj will acts as the controller in MVC while html in templates will act as the view in MVC
 
 # Models
 * `MCUser` model contains username and date_joined fields. Hardcoded in the application as it is not the focus.
@@ -35,6 +36,10 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 * `initQ` view contains one Integer input field for user to define how many multiple choices will the new question have. It also display a preview of the survey, showing survey's current added multiple choice question(s) if any.
 * `buildQ` view contains one text input field for question text, and X text input fields as defined in `initQ` view for choices. Zero choice is prohibited. Valid submission will take user back to `initQ` view. A link to go back to `index` view.
 
+# Test
+* A simple Test against url and placeholder text is createer
+* run `python manager.py test surveymaker`
+
 # Not Implemented
 * Create Question other than Multiple Choice
 * Edit question
@@ -43,11 +48,11 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 * Dynamic field
 * Active Form and Store Result 
 * Choice or More for Multiple Choice Question
+* Scheduled publication of survey
 
 # Models to support other user filling out survey
 * Create an `Answer` Model with a reference to `MCQuestion` model, a reference to `MCChoice` model PK, a reference to MCUser model PK
 * Create an `User` Model with more fields than `MCUser` Model(maybe extend `MCUser` Model). Tihs includes a password field, and a email field for identification, to support other users(instead of hardcoding) to auhtenticate and log on. 
-
 
 
 # Commands
