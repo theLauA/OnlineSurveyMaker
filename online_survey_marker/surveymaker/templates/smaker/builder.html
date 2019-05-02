@@ -1,9 +1,10 @@
+<h1>Add New Question:</h1>
 <form action="{% url 'surveymaker:initQ' sid %}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Create">
 </form>
-<a href="{% url 'surveymaker:index' %}" method="get">Finished and Return To Home Page</a>
+<a href="{% url 'surveymaker:index' %}" method="get">Finish and Return To Home Page</a>
 <h3>Survey Preview</h3>
 <p>
     {%include 'smaker/survey_inactive.html' with survey=survey %}
