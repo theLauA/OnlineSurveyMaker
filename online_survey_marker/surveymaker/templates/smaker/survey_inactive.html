@@ -1,0 +1,6 @@
+{% if survey %}
+    <h1>Survey Name: {{survey.survey_name}}</h1>
+    {%include 'smaker/question_inactive.html' with questions=survey.mcquestion_set.all%}
+{% else %}
+    <p>Empty Survey</p>
+{% endif %}

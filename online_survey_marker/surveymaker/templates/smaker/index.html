@@ -1,4 +1,4 @@
 <p>{{user.username}} owns {{user.survey_set.all|length}} survey{{user.survey_set.all|pluralize}}</p>
 
-<a href="{% url 'surveymaker:sview' user.id %}" method="post">View Survey</a>
+<a href="{% url 'surveymaker:ssview' user.id %}" method="post">View Survey</a>
 <a href="{% url 'surveymaker:create' user.id %}" method="post">Create New Survey</a>

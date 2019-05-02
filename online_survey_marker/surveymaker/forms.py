@@ -4,7 +4,7 @@ class NameForm(forms.Form):
     your_name = forms.CharField(label='Your Survey Name', max_length=100)
 
 class NumberForm(forms.Form):
-    your_number = forms.IntegerField(label="How Many Choices Does Your Question have",min_value=1,max_value=100)
+    your_number = forms.IntegerField(label="How Many Choices Does Your New Question have",min_value=1,max_value=100)
 
 class MCMakerForm(forms.Form):
     

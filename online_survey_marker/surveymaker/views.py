@@ -82,9 +82,13 @@ def buildQ(request,survey_id,num_of_choice):
 
     return render(request,'smaker/mcbuilder.html',context)
 
-class DetailView(generic.ListView):
-    template_name = 'smaker/survey.html'
+class SurveysView(generic.ListView):
+    template_name = 'smaker/survey_list.html'
     context_object_name = 'all_survey_set'
 
     def get_queryset(self):
         return MCUser.objects.get(pk=uid).survey_set.order_by('-pub_date')
+
+class SurveyView(generic.DetailView):
+    model = Survey
+    template_name = 'smaker/survey_inactive.html'

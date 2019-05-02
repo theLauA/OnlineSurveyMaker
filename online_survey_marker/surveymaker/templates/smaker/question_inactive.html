@@ -1,0 +1,12 @@
+
+{% for mcquestion in questions%}
+    <h2>{{forloop.counter}}. {{mcquestion.question_text}}</h2>
+    <ul style="list-style-type:none;">
+    {% for mcchoice in mcquestion.mcchoice_set.all %}
+        <li>
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ mcchoice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ mcchoice.choice_text }}</label><br>
+        </li>
+    {% endfor %}
+    </ul>
+{% endfor %}
