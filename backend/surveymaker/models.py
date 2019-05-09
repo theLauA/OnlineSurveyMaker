@@ -16,11 +16,11 @@ class Survey(models.Model):
         return self.survey_name
     
 class MCQuestion(models.Model):
-    survey = models.ForeignKey(Survey,on_delete=models.CASCADE)
+    survey = models.ForeignKey(Survey,related_name="questions",on_delete=models.CASCADE)
     question_text = models.CharField(max_length=200)
     
 class MCChoice(models.Model):
-    question= models.ForeignKey(MCQuestion,on_delete=models.CASCADE)
+    question= models.ForeignKey(MCQuestion,related_name="choices",on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     def __str__(self):
         return self.choice_text

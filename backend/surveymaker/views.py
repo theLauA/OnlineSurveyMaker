@@ -20,3 +20,6 @@ class SurveysView(generics.ListAPIView):
         userid = self.kwargs['userid']
         return Survey.objects.filter(creater=userid)
 
+class SurveyView(viewsets.ModelViewSet):
+    serializer_class = SurveySerializer
+    queryset = Survey.objects.all()

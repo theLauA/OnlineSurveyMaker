@@ -20,6 +20,7 @@ from surveymaker import views
 
 router = routers.DefaultRouter()
 router.register(r'users',views.UserView,'user')
+router.register(r'surveys',views.SurveyView,'survey')
 
 
 urlpatterns = [
