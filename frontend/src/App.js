@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
-
+import ViewModal from "./components/ViewModal";
 
 class App extends Component {
   constructor(props){
@@ -11,7 +11,9 @@ class App extends Component {
         name:"",
         id:1,
         surveys:[]
-      }
+      },
+      activeSurvey: null,
+      modal:false
     }
   }
   componentDidMount(){
@@ -35,7 +37,18 @@ class App extends Component {
       });
     }
   };
-
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+  };
+  viewSurvey = (survey) => {
+    if (survey.id) {
+      axios
+        .get("/api/surveys/"+survey.id)
+        .then(res => {this.setState({activeSurvey:res.data, modal:!this.state.modal});})
+        .catch(err => console.log(err));
+    }
+  }
+  
   renderSurveyList = () => {
     const surveys = this.state.user.surveys;
     return surveys.map(survey => (
@@ -49,6 +62,7 @@ class App extends Component {
         </span>
         <span>
         <button
+            onClick={() => this.viewSurvey(survey)}
             className="btn btn-success mr-2"
           >
             View{" "}
@@ -88,6 +102,12 @@ class App extends Component {
             </div>
           </div>
         </div>
+        {this.state.modal ? (
+          <ViewModal
+          toggle={this.toggle}
+          survey={this.state.activeSurvey}
+        />
+        ) : null}
       </main>
     );
   }
