@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from rest_framework import viewsets
-from .serializers import UserSerializer,SurveySerializer
+from .serializers import UserSerializer,SurveySerializer,SurveyDetailSerializer
 # Create your views here.
 
 class UserView(viewsets.ModelViewSet):
@@ -21,5 +21,5 @@ class SurveysView(generics.ListAPIView):
         return Survey.objects.filter(creater=userid)
 
 class SurveyView(viewsets.ModelViewSet):
-    serializer_class = SurveySerializer
+    serializer_class = SurveyDetailSerializer
     queryset = Survey.objects.all()
