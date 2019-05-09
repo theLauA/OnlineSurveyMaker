@@ -9,7 +9,7 @@ class MCUser(models.Model):
         return self.username
 
 class Survey(models.Model):
-    creater = models.ForeignKey(MCUser,on_delete=models.CASCADE)
+    creater = models.ForeignKey(MCUser,related_name="surveys",on_delete=models.CASCADE)
     survey_name = models.CharField(max_length=200)
     pub_date = models.DateField()
     def __str__(self):

@@ -13,9 +13,10 @@ class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = MCUser.objects.all()
 
-class SurveyView(generics.ListAPIView):
+class SurveysView(generics.ListAPIView):
     serializer_class = SurveySerializer
     
     def get_queryset(self):
         userid = self.kwargs['userid']
         return Survey.objects.filter(creater=userid)
+
