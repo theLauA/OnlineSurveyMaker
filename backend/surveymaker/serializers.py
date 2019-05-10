@@ -4,13 +4,13 @@ from .models import MCUser,Survey,MCQuestion,MCChoice
 class MCChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = MCChoice
-        fields = ('id','choice_text','question')
+        fields = ('id','choice_text')
 
 class MCQuestionSerializer(serializers.ModelSerializer):
     choices = MCChoiceSerializer(many=True,read_only=True)
     class Meta:
         model = MCQuestion
-        fields = ('id','question_text','choices','survey')
+        fields = ('id','question_text','choices')
 
 class SurveySerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,8 +23,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = MCUser
         fields = ('id', 'username', 'date_joined','surveys')
 
+
 class SurveyDetailSerializer(serializers.ModelSerializer):
-    questions = MCQuestionSerializer(many=True,read_only=True)
+    questions = MCQuestionSerializer(many=True)
     class Meta:
         model = Survey
         fields = ('id','creater','survey_name','pub_date','questions')
+    
+    def update(self,validated_data):
+        print("Checkpoint")
+
+    

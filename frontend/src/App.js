@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
 import CustomModal from "./components/Modal";
+import {
+  Form,
+  FormGroup,
+  Input
+} from "reactstrap";
 
 class App extends Component {
   constructor(props){
@@ -14,7 +19,8 @@ class App extends Component {
       },
       activeSurvey: null,
       modal:false,
-      edit:false
+      edit:false,
+      newSurveyName:"",
     }
   }
   componentDidMount(){
@@ -46,12 +52,7 @@ class App extends Component {
     
   };
   editSurvey = (survey) => {
-    if (survey.id) {
-      axios
-        .get("/api/surveys/"+survey.id)
-        .then(res => {this.setState({activeSurvey:res.data, modal:!this.state.modal,edit:true});})
-        .catch(err => console.log(err));
-    }
+    this.setState({activeSurvey:survey,modal:!this.state.modal,edit:true});
   }
   
   renderSurveyList = () => {
@@ -89,6 +90,18 @@ class App extends Component {
 
   };
 
+  //Handle Creation of New Survey
+  handleChange = e =>{
+    this.state.newSurveyName = e.target.value;
+  }
+  handleCreate = e =>{
+    if(this.state.newSurveyName!==""){
+      axios
+        .put("/api/surveys/",{creater:this.state.user.id,survey_name:this.state.newSurveyName})
+        .then(res =>{survey=res.data['survey'];this.editSurvey(survey)});
+    }
+  }
+
   render() {
     return (
       <main className="content">
@@ -97,9 +110,14 @@ class App extends Component {
           <div className="col-md-6 col-sm-10 mx-auto p-0 rounded bg-light">  
             <div className="card p-3">
               <div className="">
-                <button className="btn btn-primary">
+                <Form>
+                  <FormGroup>
+                    <Input type="text" placeholder="New Survey Name" name="surveyname" onChange={this.handleChange}/>
+                  </FormGroup>
+                  <button className="btn btn-primary">
                     Create New Survey
-                </button>
+                  </button>
+                </Form>
               </div>
               <h2>You have created {this.state.user.surveys.length} survey{this.state.user.surveys.length > 0 ?"s":""}</h2>
               <ul className="list-group list-group-flush">
