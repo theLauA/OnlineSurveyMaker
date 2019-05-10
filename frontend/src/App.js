@@ -91,15 +91,18 @@ class App extends Component {
   };
 
   //Handle Creation of New Survey
-  handleChange = e =>{
+  //const survey=res.data['survey'];
+  handleChange = (e) =>{
     this.state.newSurveyName = e.target.value;
   }
-  handleCreate = e =>{
+  handleCreate = (e) =>{
+    
     if(this.state.newSurveyName!==""){
       axios
-        .put("/api/surveys/",{creater:this.state.user.id,survey_name:this.state.newSurveyName})
-        .then(res =>{survey=res.data['survey'];this.editSurvey(survey)});
-    }
+        .put("/api/users/"+this.state.user.id+"/",{survey_name:this.state.newSurveyName})
+        .then(res =>{const survey=res.data;this.editSurvey(survey)});
+    };
+    this.setState({newSurveyName:""});
   }
 
   render() {
@@ -114,10 +117,10 @@ class App extends Component {
                   <FormGroup>
                     <Input type="text" placeholder="New Survey Name" name="surveyname" onChange={this.handleChange}/>
                   </FormGroup>
-                  <button className="btn btn-primary">
-                    Create New Survey
-                  </button>
                 </Form>
+                <button className="btn btn-primary" onClick={()=>this.handleCreate()}>
+                    Create New Survey
+                </button>
               </div>
               <h2>You have created {this.state.user.surveys.length} survey{this.state.user.surveys.length > 0 ?"s":""}</h2>
               <ul className="list-group list-group-flush">

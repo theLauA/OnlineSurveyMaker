@@ -15,7 +15,17 @@ from rest_framework.response import Response
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = MCUser.objects.all()
-
+    
+    def update(self,request,pk=None):
+        user = self.get_object()
+        serializer = SurveySerializer(data=request.data)
+        if serializer.is_valid():
+            survey = Survey.objects.create(pub_date=timezone.now(),creater=user,survey_name=serializer.data['survey_name'])
+            survey.save()
+            return Response(data={"id":survey.id,"survey_name":survey.survey_name},status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
 class SurveysView(generics.ListAPIView):
     serializer_class = SurveySerializer
     
@@ -39,7 +49,9 @@ class SurveyView(viewsets.ModelViewSet):
                     c = MCChoice.objects.create(question=question,choice_text=c_serializer.data['choice_text'])
                     c.save()
             question.save()
-            return Response({'status':'question add'})
+            return Response({"status":"question add"})
         else:
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
+
+    
