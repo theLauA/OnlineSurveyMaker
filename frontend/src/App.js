@@ -54,7 +54,11 @@ class App extends Component {
   editSurvey = (survey) => {
     this.setState({activeSurvey:survey,modal:!this.state.modal,edit:true});
   }
-  
+  deleteSurvey = (survey) => {
+    axios
+      .delete('api/surveys/'+survey.id+'/')
+      .then(res => this.refreshUserInfo())
+  }
   renderSurveyList = () => {
     const surveys = this.state.user.surveys;
     return surveys.map(survey => (
@@ -80,6 +84,7 @@ class App extends Component {
             Edit{" "}
           </button>
           <button
+          onClick={() => this.deleteSurvey(survey)}
             className="btn btn-danger"
           >
             Delete{" "}
