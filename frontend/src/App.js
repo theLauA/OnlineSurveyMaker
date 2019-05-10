@@ -5,7 +5,10 @@ import CustomModal from "./components/Modal";
 import {
   Form,
   FormGroup,
-  Input
+  Input,
+  UncontrolledPopover, 
+  PopoverHeader, 
+  PopoverBody
 } from "reactstrap";
 
 class App extends Component {
@@ -84,11 +87,17 @@ class App extends Component {
             Edit{" "}
           </button>
           <button
-          onClick={() => this.deleteSurvey(survey)}
+            id = {"DeleteButton"+survey.id}
             className="btn btn-danger"
           >
             Delete{" "}
           </button>
+          <UncontrolledPopover trigger="focus" placement="right" target={"DeleteButton"+survey.id}>
+            <PopoverHeader>Are You Sure?</PopoverHeader>
+            <PopoverBody>
+              <button className="btn btn-danger" onClick={() => this.deleteSurvey(survey)}>Yes! Delete {survey.survey_name}!</button>
+            </PopoverBody>
+          </UncontrolledPopover>
         </span>
       </li>
     ));
