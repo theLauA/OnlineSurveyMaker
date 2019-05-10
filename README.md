@@ -1,9 +1,16 @@
 # OnlineSurveyMaker
 
 # Requirement
-Python 3 and Django Installed \
-run `python manage.py runserver` at root to start the application \
-By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Maker Appliction is hosted on `http://127.0.0.1:8000/smaker/`
+PipEnv, Python 3 and Django Installed \
+To start backend:
+make sure packages are install `pipenv install djangorestframework django-cors-headers` \
+start vitual environment `cd bacckend`, `pipenv shell` \
+run `python manage.py runserver` at root to start the backend server \
+By Default, the website is hosted on `http://localhost:8000/` and this is what the REACT front end is configured to \
+To start frontend:
+go to root and `cd frontend`\
+install packages `yarn install`\
+start client `yarn start`
 
 # User Cases
 1. The user create a new survey
@@ -11,17 +18,19 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 3. Save the survey
 
 # Approach
-* A home page to choose between MAKE view or View view
-* MAKE view:
-    * Create Survey with custom name
-    * Create Multiple Choice Question and Add to survey
-    * Specify Number of Choices First, then use django form to generate textfields for input
-    * Preview Created Questions
-* View view:
-    * For user to go through Created Surveys
-    * Similar to the turtorial `polls` app in terms of view
-    * Models needed to save surveys data is similar to `polls` app as well, but it doesn't fit the use cases well enough to inherent Models from `polls`.
-* View.py will acts as the controller in MVC while html in templates will act as the view in MVC
+* A home page to choose between creating a new survey, viewing an existing survey, and adding new question to an existing survey
+* View an existing survey
+    * A Modal is poped up rendering the survey
+    * No submit button
+* Edit an existing survey
+    * A Modal is poped up
+        * A Textfield to define how many choices with the new question has
+        * A preview for created questions in the survey
+    * share Modal with View
+* Create a new Survey
+    * A Text Field in Home Page to ask for new Survey's Name
+    * A Modal with pop allowing user to add new Question
+        * Same Modal as Edit
 
 # Models
 * `MCUser` model contains username and date_joined fields. Hardcoded in the application as it is not the focus.
@@ -30,13 +39,19 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 * `MCChoice` model contains a reference to `MCQuestion` model, choice_text to sotre teh text of the choice of a multiple choice question.
 * HighLevel Overview: 1 user -> N Surveys, 1 Survey -> N MCQuestion, 1 MCQuestion -> N MCChoice
 
-# Views
-* `index` view landing page of the app, contains two buttons `View Survey` and `Create New Survey`, and they will bring user to `ssview` view and `create` view coresspondingly.
-* `Surveysview` shows a list of surveys created by the user as list of links when the user has created at least one survey. Links will bring user to the `Surveyview` view to display detail of the survey.
-* `Surveyview` render survey as form without submit button.
-* `create` view contains one text input field for user to enter the new survey's name. Submit will take the user to `initQ` view.
-* `initQ` view contains one Integer input field for user to define how many multiple choices will the new question have. It also display a preview of the survey, showing survey's current added multiple choice question(s) if any.
-* `buildQ` view contains one text input field for question text, and X text input fields as defined in `initQ` view for choices. Zero choice is prohibited. Valid submission will take user back to `initQ` view. A link to go back to `index` view.
+# React Component
+* App
+    * A landing page to display username and surveys
+    * Surveys are display as list
+        * Name
+        * Three buttons (DELETE is not working)
+    * Click on EDIT or VIEW will open the Modal Component
+    * A TEXT INPUT field to enter survey name
+        * Create a survey and Open Modal in Edit Mode upon submit
+* Modal
+    * Two Mode
+        * View mode will just render the survey
+        * Edit mode will allow user to add question
 
 # Test
 * A simple Test against url and placeholder text is createer
@@ -61,8 +76,6 @@ By Default, the website is hosted on `http://127.0.0.1:8000/` and the Survey Mak
 
 
 # Commands
-Install Django \
-`pip install Django` \
 Start Web-App when in folder \
 `python manager.py runserver` \
 Create Django project \
@@ -80,3 +93,6 @@ Reset database migration define by app \
 ..* Pass userId between views using session
 3. Added Features: ability to create a new survey and add mc questions to the survey; view created survey
 4. Added: ability to add multiple choice question to a created survey.
+5. REACT UI inspired by: https://scotch.io/tutorials/build-a-to-do-application-using-django-and-react
+6. Added: REACT UI added. Ditched Django html views, and use it as REST server.
+7. Use pipenv to set up backend environment
