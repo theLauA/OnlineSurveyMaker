@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from "axios";
-import ViewModal from "./components/ViewModal";
+import CustomModal from "./components/Modal";
 
 class App extends Component {
   constructor(props){
@@ -13,7 +13,8 @@ class App extends Component {
         surveys:[]
       },
       activeSurvey: null,
-      modal:false
+      modal:false,
+      edit:false
     }
   }
   componentDidMount(){
@@ -41,10 +42,14 @@ class App extends Component {
     this.setState({ modal: !this.state.modal });
   };
   viewSurvey = (survey) => {
+    this.setState({activeSurvey:survey,modal:!this.state.modal,edit:false});
+    
+  };
+  editSurvey = (survey) => {
     if (survey.id) {
       axios
         .get("/api/surveys/"+survey.id)
-        .then(res => {this.setState({activeSurvey:res.data, modal:!this.state.modal});})
+        .then(res => {this.setState({activeSurvey:res.data, modal:!this.state.modal,edit:true});})
         .catch(err => console.log(err));
     }
   }
@@ -68,6 +73,7 @@ class App extends Component {
             View{" "}
           </button>
           <button
+          onClick={() => this.editSurvey(survey)}
             className="btn btn-secondary mr-2"
           >
             Edit{" "}
@@ -103,9 +109,10 @@ class App extends Component {
           </div>
         </div>
         {this.state.modal ? (
-          <ViewModal
+          <CustomModal
           toggle={this.toggle}
           survey={this.state.activeSurvey}
+          edit={this.state.edit}
         />
         ) : null}
       </main>
