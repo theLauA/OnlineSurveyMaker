@@ -31,6 +31,7 @@ start client `yarn start`
     * A Text Field in Home Page to ask for new Survey's Name
     * A Modal with pop allowing user to add new Question
         * Same Modal as Edit
+* Use Modal to keep the one page design, and reduce routing
 
 # Models
 * `MCUser` model contains username and date_joined fields. Hardcoded in the application as it is not the focus.
@@ -60,7 +61,6 @@ start client `yarn start`
 # Not Implemented
 * Create Question other than Multiple Choice
 * Edit question
-* Delete survey
 * Delete question
 * Dynamic field
 * Active Form and Store Result 
