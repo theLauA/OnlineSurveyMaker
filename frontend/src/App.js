@@ -100,7 +100,7 @@ class App extends Component {
     if(this.state.newSurveyName!==""){
       axios
         .put("/api/users/"+this.state.user.id+"/",{survey_name:this.state.newSurveyName})
-        .then(res =>{const survey=res.data;this.editSurvey(survey)});
+        .then(res =>{const survey=res.data;this.refreshUserInfo();this.editSurvey(survey)});
     };
     this.setState({newSurveyName:""});
   }
